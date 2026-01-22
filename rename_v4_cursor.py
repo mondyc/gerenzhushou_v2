@@ -122,7 +122,7 @@ def setup_upgrade_folder():
         return True
     else:
         print("upgrade_package文件夹已存在！")
-        print("是否清空upgrade_package文件夹的所有内容？1. 清空 or 2. 不清空")
+        print("是否删除upgrade_package文件夹及其中的内容？1. 删除 or 2. 不删除")
         choice = input("请输入你的选择：")
         
         if choice == "1":
