@@ -145,16 +145,17 @@ def setup_upgrade_folder():
 
 def get_user_input():
     """
-    获取用户输入的版本信息和日期
+    获取用户输入的路径、版本信息和日期
     
     返回:
-        tuple: (version, wps_version, date) 版本号和日期元组
+        tuple: (pkg_path, version, wps_version, date) 路径、版本号和日期元组
     """
+    pkg_path = input("请输入包文件路径（如 ./package）：").strip()
     version = input("请输入灵犀·晓伴的版本号：")
     wps_version = input("请输入wps的版本号：")
     date = input("请输入日期（格式：20210101）：")
     
-    return version, wps_version, date
+    return pkg_path, version, wps_version, date
 
 
 def create_folder_structure(version, date):
@@ -415,29 +416,30 @@ def main():
     print("文件重命名和组织脚本")
     print("=" * 50)
     
-    # 1. 检查pkg文件夹是否存在
-    print("\n[步骤1] 检查package文件夹...")
-    pkg_dirs = get_pkg_dirs(PKG_PATH)
+    # 1. 获取用户输入
+    print("\n[步骤1] 获取用户输入...")
+    pkg_path, version, wps_version, date = get_user_input()
+    print(f"包文件路径：{pkg_path}")
+    print(f"版本号：{version}, WPS版本号：{wps_version}, 日期：{date}")
+    
+    # 2. 检查pkg文件夹是否存在
+    print("\n[步骤2] 检查package文件夹...")
+    pkg_dirs = get_pkg_dirs(pkg_path)
     if not pkg_dirs:
         print("错误：当前目录中未找到pkg开头的文件夹")
-        print(f"请确保在 {PKG_PATH} 目录下存在pkg开头的文件夹")
+        print(f"请确保在 {pkg_path} 目录下存在pkg开头的文件夹")
         sys.exit(1)
     print(f"找到pkg文件夹：{pkg_dirs}")
     
-    # 2. 检查并处理已存在的目标文件夹
-    print("\n[步骤2] 检查已存在的目标文件夹...")
+    # 3. 检查并处理已存在的目标文件夹
+    print("\n[步骤3] 检查已存在的目标文件夹...")
     if not check_existing_target_folder():
         sys.exit(0)
     
-    # 3. 设置升级包文件夹
-    print("\n[步骤3] 设置升级包文件夹...")
+    # 4. 设置升级包文件夹
+    print("\n[步骤4] 设置升级包文件夹...")
     if not setup_upgrade_folder():
         sys.exit(0)
-    
-    # 4. 获取用户输入
-    print("\n[步骤4] 获取用户输入...")
-    version, wps_version, date = get_user_input()
-    print(f"版本号：{version}, WPS版本号：{wps_version}, 日期：{date}")
     
     # 5. 创建文件夹结构
     print("\n[步骤5] 创建文件夹结构...")
@@ -448,15 +450,15 @@ def main():
     
     # 7. 复制Linux文件
     print("\n[步骤6] 复制Linux平台文件...")
-    copy_linux_files(PKG_PATH, new_dir_name, linux_dir_name, version, date_suffix, UPGRADE_PATH)
+    copy_linux_files(pkg_path, new_dir_name, linux_dir_name, version, date_suffix, UPGRADE_PATH)
     
     # 8. 复制Mac文件
     print("\n[步骤7] 复制Mac平台文件...")
-    copy_mac_files(PKG_PATH, new_dir_name, mac_dir_name, version, date_suffix, UPGRADE_PATH)
+    copy_mac_files(pkg_path, new_dir_name, mac_dir_name, version, date_suffix, UPGRADE_PATH)
     
     # 9. 复制Windows文件
     print("\n[步骤8] 复制Windows平台文件...")
-    copy_windows_files(PKG_PATH, new_dir_name, win_dir_name, date_suffix, UPGRADE_PATH)
+    copy_windows_files(pkg_path, new_dir_name, win_dir_name, date_suffix, UPGRADE_PATH)
     
     # 10. 复制帮助文档
     print("\n[步骤9] 复制帮助文档...")
