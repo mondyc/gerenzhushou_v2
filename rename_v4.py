@@ -154,7 +154,7 @@ for file in os.listdir(pkgpath):
 
     if os.path.isdir(os.path.join(pkgpath, file)) and re.match(r'^pkg-mac-x64.*', file):
         # 拼接名称，灵犀·晓伴-1.2.27-标准版-1216-mac-x64.zip
-        new_mac_x64 = "灵犀·晓伴-" + version + "-标准版-" + new_date + "-mac-intel-x64.zip"
+        new_mac_x64 = "灵犀·晓伴-" + version + "-标准版-" + new_date + "-mac-x64.zip"
         # 复制文件"灵犀·晓伴.zip"文件
         shutil.copy(os.path.join(pkgpath, file, "灵犀·晓伴.zip"), os.path.join(new_dir_name, mac_dir_name, new_mac_x64))
         # 打印文件路径
@@ -164,11 +164,11 @@ for file in os.listdir(pkgpath):
         # 复制文件"灵犀·晓伴.zip"文件到uppath文件夹下
         shutil.copy(os.path.join(pkgpath, file, "灵犀·晓伴.zip"), os.path.join(uppath, new2_mac_x64))
 
-# 获取当前目录下的文件中包含“suxiaoban-*-setup.exe.zip”开头的列表
+# 获取当前目录下的文件中包含“灵犀·晓伴-*-setup.exe.zip”开头的列表
 def get_suxiaoban_setup_files(path):
     suxiaoban_setup_files = []
     for winfile in os.listdir(path):
-        if re.match(r'^suxiaoban-.*-setup.exe.zip', winfile):
+        if re.match(r'^灵犀·晓伴-.*-setup.exe.zip', winfile):
             suxiaoban_setup_files.append(winfile)
     return suxiaoban_setup_files
 
