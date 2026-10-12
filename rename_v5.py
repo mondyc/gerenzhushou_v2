@@ -6,6 +6,7 @@
 # 20250102更新：检查当前目录下名称包含“灵犀·晓伴_*--*”的文件夹，如果有，则提示“文件夹已存在”，并询问用户是否删除整个文件夹
 # 20260331更新：新增了对升级包的改名和文件夹路径
 # 20260611更新：新增了对zenity离线安装包的复制
+# 20260716更新：新增了对zenity离线安装包(amd64)3.32.zip的复制
 
 import os
 import re
@@ -220,7 +221,7 @@ shutil.copy(os.path.join(helppath, "华为990+9006c芯片-麒麟2203及更早系
 
 # 将help_documentation路径下的帮助说明文档“zenity离线安装包.zip”分别复制到linux_arm_dir_name和linux_x64_dir_name文件夹下
 shutil.copy(os.path.join(helppath, "zenity离线安装包.zip"), os.path.join(new_dir_name, linux_arm_dir_name, "zenity离线安装包.zip"))
-shutil.copy(os.path.join(helppath, "zenity离线安装包.zip"), os.path.join(new_dir_name, linux_x64_dir_name, "zenity离线安装包.zip"))
+shutil.copy(os.path.join(helppath, "zenity离线安装包(amd64)3.32.zip"), os.path.join(new_dir_name, linux_x64_dir_name, "zenity离线安装包(amd64)3.32.zip"))
 
 # 将help_documentation路径下的帮助说明文档“苏晓伴 mac 版安装说明.docx”复制到mac_dir_name文件夹下
 # shutil.copy(os.path.join(helppath, "苏晓伴 mac 版安装说明.docx"), os.path.join(new_dir_name, mac_dir_name, "苏晓伴 mac 版安装说明.docx"))
